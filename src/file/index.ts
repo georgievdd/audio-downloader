@@ -55,4 +55,28 @@ export class FileService {
     static createDir(url: string) {
         fs.mkdirSync(url)
     }
+
+    static readFile(filePath: string): FileData {
+        const options: Record<string, string> = {}
+        const data = fs.readFileSync(filePath, 'utf8').split('\n')
+            .map(s => s.trim())
+            .filter(Boolean)
+            .filter(s => {
+                if (s.startsWith(':')) {
+                    const vals = s.split(':')
+                    options[vals[1]] = vals[2]
+                    return false
+                }
+                return true
+            })
+        return {
+            options,
+            data
+        }
+    }
+}
+
+export interface FileData {
+    data: string[]
+    options: Record<string, string>
 }

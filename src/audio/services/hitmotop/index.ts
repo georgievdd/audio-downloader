@@ -1,5 +1,6 @@
 import { createDocument } from "../../../helpers";
 import { AudioMethods, Track } from "../interface";
+import axios from "axios";
 import config from './config.json'
 export class HitmotopService implements AudioMethods {
     async getAudioUrls(prompt: string) {
@@ -9,7 +10,7 @@ export class HitmotopService implements AudioMethods {
         const result: Track[] = []
         tracks.forEach(track => {
             const url = track.querySelector<HTMLAnchorElement>(config.selectors.track_link)!.href
-            const name = track.querySelector(config.selectors.track_link)?.textContent || ''
+            const name = track.querySelector(config.selectors.track_name)?.textContent || ''
             const author = track.querySelector(config.selectors.track_author)?.textContent || ''
             const format = url.split('.').at(-1) || 'mp3';
             result.push({

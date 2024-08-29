@@ -1,9 +1,9 @@
-import { Session } from "./session";
-import { HitmotopService } from "./audio/services/hitmotop";
-import { Timer } from "./helpers";
+import { Session } from "./session"
+import { HitmotopService } from "./audio/services/hitmotop"
+import { Timer } from "./helpers"
+import { FileService } from "./file"
 async function main(prompts: string[], additionalDownload: number = 0) {
     const session = new Session()
-    const hitmotop = new HitmotopService()
     const timer = new Timer();
     const loadService = new HitmotopService();
     await Promise.allSettled(prompts.map(prompt => new Promise(async (resolve, reject) => {
@@ -25,12 +25,6 @@ async function main(prompts: string[], additionalDownload: number = 0) {
     console.log(`downloaded at ${timer.end()} seconds`);
 }
 
-main([
-    "золотая осень",
-    "Россия Газман",
-    "Пришествие",
-    "Голубая Луна",
-    "HELP Beatles",
-    "Шум дождя",
-    "17 мгновений весны"
-]);
+const file = FileService.readFile("list.txt")
+const addition = +(file.options["addition"] || '0')
+main(file.data, addition);
