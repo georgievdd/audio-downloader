@@ -1,0 +1,26 @@
+{
+  "name": "audio-downloader",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "npx tsc",
+    "start": "node dist/index",
+    "dev": "npm run compile && npm run start"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@types/axios": "^0.9.36",
+    "@types/jsdom": "^21.1.7",
+    "axios": "^1.7.5",
+    "jsdom": "^25.0.0",
+    "ts-loader": "^9.5.1",
+    "webpack": "^5.94.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.4",
+    "webpack-cli": "^5.1.4"
+  }
+}

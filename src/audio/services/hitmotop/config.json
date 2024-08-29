@@ -1,0 +1,10 @@
+{
+    "uri": "https://rus.hitmotop.com",
+    "queryUri": "https://rus.hitmotop.com/search?q=",
+    "selectors": {
+        "tracks": ".tracks__list li",
+        "track_link": ".track__info-r a",
+        "track_name": ".track__info .track__title",
+        "track_author": ".track__info .track__desc"
+    }
+}
