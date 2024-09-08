@@ -10,17 +10,19 @@ async function main(prompts: string[], additionalDownload: number = 0) {
         const tracks = await loadService.getAudioUrls(prompt);
         const track = tracks.shift();
         if (!track) {
-            return reject(new Error("No audio"));
+            console.log("НЕ УДАЛОСЬ СКАЧАТЬ: " + prompt)
+            
+            return reject(new Error("No audio"))
         }
-        const path = await session.downloadTrack(track);
+        const path = await session.downloadTrack(track)
         const adPaths = tracks?.slice(0, additionalDownload).map((track, i) => {
             return session.downloadTrack(track, prompt)
         });
-        console.log(`${prompt}: downloaded in ${path}`);
+        console.log(`${prompt}: downloaded in ${path}`)
         adPaths.forEach(async (adPath) =>  {
-            console.log(`${prompt}: downloaded in ${await adPath}`);
+            console.log(`${prompt}: downloaded in ${await adPath}`)
         })
-        resolve(path);
+        resolve(path)
     })))
     console.log(`downloaded at ${timer.end()} seconds`);
 }

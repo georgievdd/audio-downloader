@@ -20,7 +20,7 @@ export class HitmotopService implements AudioMethods {
                 format,
             })
         })
-        return result;
+        return result.filter(track => track.url)
     }
 
     private async fetchPage(prompt: string) {

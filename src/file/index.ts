@@ -23,24 +23,27 @@ export class FileService {
         return new Promise((resolve, reject) => {
             axios.get(track.url, { responseType: 'stream' })
                 .then(response => {
-                if (response.status !== 200) {
-                    console.error(response.status, "Error downloading file")
-                    reject()
-                    return
-                }
-                const file = response.data as any
-                let error: Error | null = null
-                file.pipe(writer)
-                writer.on('error', err => {
-                    error = err
-                    writer.close()
-                    reject(err)
-                })
-                writer.on('close', () => {
-                    if (!error) {
-                        resolve(filePath)
+                    if (response.status !== 200) {
+                        console.error(response.status, "Error downloading file")
+                        reject()
+                        return
                     }
+                    const file = response.data as any
+                    let error: Error | null = null
+                    file.pipe(writer)
+                    writer.on('error', err => {
+                        error = err
+                        writer.close()
+                        reject(err)
+                    })
+                    writer.on('close', () => {
+                        if (!error) {
+                            resolve(filePath)
+                        }
+                    })
                 })
+            .catch(err => {
+                console.log(`ERROR: url: ${track.url}. name: ${fileName}`);
             })
         })
     }
